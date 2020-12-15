@@ -11,21 +11,20 @@ spec:
   #     cpu: "2"
   #     memory: 1Gi
   #   min:
-  #     # 与 container 限制保持一致
-  #     cpu: 10m
-  #     memory: 64Mi
+  #     cpu: 30m
+  #     memory: 128Mi
   # 限制 containers
   - type: Container
     # 如果容器没有声明自己的 CPU 和 内存请求和限制，将使用默认 CPU 和 内存 请求和限制。
     default:
-      cpu: 200m
+      cpu: 300m
       memory: 512Mi
     defaultRequest:
-      cpu: "80m"
-      memory: "256Mi"
+      cpu: "20m"
+      memory: "128Mi"
     max:
       cpu: "1"
       memory: 1.8Gi
     min:
       cpu: 10m
-      memory: 16Mi
+      memory: 64Mi
