@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ${APP_DEMO_NAME}
+  name: docker-2048
 spec:
   selector:
     matchLabels:
-      app: ${APP_DEMO_NAME}
+      app: docker-2048
   template:
     metadata:
       labels:
-        app: ${APP_DEMO_NAME}
+        app: docker-2048
     spec:
       containers:
-      - name: ${APP_DEMO_NAME}
-        image: ${APP_DEMO_NAME}
+      - name: docker-2048
+        image: docker-2048
         env:
-        # 定义容器内日志路径，logtail 为 ${PROJECT_NAME}
-        - name: aliyun_logs_${PROJECT_NAME}-sit
+        # 定义容器内日志路径，logtail 为 app-demo
+        - name: aliyun_logs_app-demo-sit
           value: /app/logs/*.log
         ports:
         - name: http-80

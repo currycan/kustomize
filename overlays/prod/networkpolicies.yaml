@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: ${PROJECT_NAME}
+  name: app-demo
 spec:
   podSelector:
     matchExpressions:
@@ -23,7 +23,7 @@ spec:
   - from:
     - namespaceSelector:
         matchLabels:
-          project: ${PROJECT_NAME}
+          project: app-demo
     # ports:
     # - protocol: TCP
     #   port: 80

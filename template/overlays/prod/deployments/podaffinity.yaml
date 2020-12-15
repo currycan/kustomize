@@ -1,0 +1,24 @@
+# operator 有以下几种逻辑关系
+# In：label 的值在某个列表中
+# NotIn：label 的值不在某个列表中
+# Gt：label 的值大于某个值
+# Lt：label 的值小于某个值
+# Exists：某个 label 存在
+# DoesNotExist：某个 label 不存在
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${APP_DEMO_NAME}
+spec:
+  template:
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - "${APP_DEMO_NAME}"
+            topologyKey: "kubernetes.io/hostname"

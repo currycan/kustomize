@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${APP_DEMO_NAME}
+spec:
+  template:
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: ${APP_DEMO_NAME}
+        # http probe
+        # livenessProbe:
+        #   httpGet:
+        #     path: /actuator/health
+        #     port: 80
+        #   initialDelaySeconds: 10
+        #   periodSeconds: 3
+        # readinessProbe:
+        #   initialDelaySeconds: 20
+        #   periodSeconds: 10
+        #   httpGet:
+        #     path: /actuator/info
+        #     port: 80
+        readinessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 20

@@ -1,0 +1,21 @@
+#! /bin/env bash
+
+set -e
+
+export env=("sit" "uat" "prod")
+
+[[ ! $# -eq 1 ]] && echo "请输入需要部署的环境名称: sit/uat/prod" && exit 1
+
+[[ ! "${env[@]}" =~ $1 ]] && echo "请输入需要部署的环境名称: sit/uat/prod" && exit 1
+
+export PROJECT_NAME="project-name"
+export APP_DEMO_NAME="docker-2048"
+export APP_DEMO_IMAGE_NAME="alexwhen/docker-2048"
+export APP_DEMO_IMAGE_TAG="latest"
+
+find . -type f -print0 | xargs -0 sed -e "s#\${PROJECT_NAME}#${PROJECT_NAME}#g" -i
+find . -type f -print0 | xargs -0 sed -e "s#\${APP_DEMO_NAME}#${APP_DEMO_NAME}#g" -i
+sed -e "s#\${APP_DEMO_IMAGE_NAME}#${APP_DEMO_IMAGE_NAME}#g" -i overlays/$1/kustomization.yaml
+sed -e "s#\${APP_DEMO_IMAGE_TAG}#${APP_DEMO_IMAGE_TAG}#g" -i overlays/$1/kustomization.yaml
+
+kustomize build overlays/$1

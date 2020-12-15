@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base
+# 可以是url
+# - https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/examples/wordpress/wordpress/deployment.yaml
+commonLabels:
+  project: ${PROJECT_NAME}
+  owner: alice
+  app: bingo
+patchesStrategicMerge:
+# 需要优先创建的资源写在前面
+- patch.yaml
+- service_patch.yaml
+- env_patch.yaml
+- healthcheck_patch.yaml
+- memorylimit_patch.yaml
+- strategy_patch.yaml

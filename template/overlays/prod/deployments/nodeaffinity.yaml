@@ -1,0 +1,32 @@
+# operator 有以下几种逻辑关系
+# In：label 的值在某个列表中
+# NotIn：label 的值不在某个列表中
+# Gt：label 的值大于某个值
+# Lt：label 的值小于某个值
+# Exists：某个 label 存在
+# DoesNotExist：某个 label 不存在
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${APP_DEMO_NAME}
+spec:
+  template:
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:  # 硬策略
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: 'node-role.kubernetes.io/worker'
+                operator: In
+                values:
+                - 'true'
+          preferredDuringSchedulingIgnoredDuringExecution:  # 软策略
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: 'kubernetes.io/hostname'
+                operator: In
+                values:
+                - '10.177.92.4'
+                - '10.177.92.5'

@@ -8,7 +8,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ${APP_DEMO_NAME}
+  name: docker-2048
 spec:
   template:
     spec:
@@ -20,5 +20,5 @@ spec:
               - key: app
                 operator: In
                 values:
-                - "${APP_DEMO_NAME}"
+                - "docker-2048"
             topologyKey: "kubernetes.io/hostname"

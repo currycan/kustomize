@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ResourceQuota
 metadata:
-  name: ${PROJECT_NAME}-resource-limit
+  name: app-demo-resource-limit
 spec:
   hard:
     # 10个服务, cpu request: 50mi, mem request: 256Mi
@@ -21,7 +21,7 @@ spec:
 # apiVersion: v1
 # kind: ResourceQuota
 # metadata:
-#   name: ${PROJECT_NAME}-resource-limit-high
+#   name: app-demo-resource-limit-high
 # spec:
 #   hard:
 #     requests.cpu: "200m"
@@ -43,7 +43,7 @@ spec:
 apiVersion: v1
 kind: ResourceQuota
 metadata:
-  name: ${PROJECT_NAME}-resource-counts
+  name: app-demo-resource-counts
 spec:
   hard:
     pods: "20"

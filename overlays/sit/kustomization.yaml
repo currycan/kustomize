@@ -5,7 +5,7 @@ resources:
 # 可以是url
 # - https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/examples/wordpress/wordpress/deployment.yaml
 commonLabels:
-  project: ${PROJECT_NAME}
+  project: app-demo
   owner: alice
   app: bingo
 patchesStrategicMerge:

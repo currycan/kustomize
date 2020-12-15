@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${APP_DEMO_NAME}
+spec:
+  selector:
+    matchLabels:
+      app: ${APP_DEMO_NAME}
+  template:
+    metadata:
+      labels:
+        app: ${APP_DEMO_NAME}
+    spec:
+      containers:
+      - name: ${APP_DEMO_NAME}
+        image: ${APP_DEMO_NAME}
+        env:
+        # 定义容器内日志路径，logtail 为 ${PROJECT_NAME}
+        - name: aliyun_logs_${PROJECT_NAME}-sit
+          value: /app/logs/*.log
+        ports:
+        - name: http-80
+          containerPort: 80
+          protocol: TCP
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "sleep 1"]
+          preStop:
+            exec:
+              command:
+              - "/bin/sh"
+              - "-c"
+              - |
+                sleep 10

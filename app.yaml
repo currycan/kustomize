@@ -11,12 +11,12 @@ spec:
   source:
     repoURL: https://github.com/currycan/kustomize.git
     targetRevision: v0.0.1
-    path: overlays
+    path: overlays/prod
+    # kustomize:
+    #   version: v3.8.7
   destination:
     server: https://kubernetes.default.svc
     namespace: demo-app
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-    kustomize:
-      version: v3.8.7
