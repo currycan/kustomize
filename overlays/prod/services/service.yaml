@@ -5,8 +5,6 @@ metadata:
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s3.small
     service.beta.kubernetes.io/alicloud-loadbalancer-address-type: intranet
   name: ${APP_DEMO_NAME}
-  labels:
-    app: ${APP_DEMO_NAME}
 spec:
   externalTrafficPolicy: Local
   publishNotReadyAddresses: true
