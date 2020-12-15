@@ -10,20 +10,23 @@ spec:
       operator: "Exists"
   policyTypes:
   - Ingress
-  # IP 段访问白名单, 入向
+  # 允许所有入向流量
   ingress:
-  - from:
-    - ipBlock:
-        cidr: 172.22.0.0/16
-    - ipBlock:
-        cidr: 172.23.0.0/20
-    - ipBlock:
-        cidr: 10.177.92.0/24
-  # namespace 访问白名单, 入向
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          project: app-demo
-    # ports:
-    # - protocol: TCP
-    #   port: 80
+  - {}
+  # # IP 段访问白名单, 入向
+  # ingress:
+  # - from:
+  #   - ipBlock:
+  #       cidr: 172.22.0.0/16
+  #   - ipBlock:
+  #       cidr: 172.23.0.0/20
+  #   - ipBlock:
+  #       cidr: 10.177.92.0/24
+  # # namespace 访问白名单, 入向
+  # - from:
+  #   - namespaceSelector:
+  #       matchLabels:
+  #         project: app-demo
+  #   # ports:
+  #   # - protocol: TCP
+  #   #   port: 80
