@@ -5,15 +5,15 @@ metadata:
   name: app-demo
 spec:
   limits:
-  # 限制 pods
-  - type: Pod
-    max:
-      cpu: "2"
-      memory: 1Gi
-    min:
-      # 与 container 限制保持一致
-      cpu: 10m
-      memory: 64Mi
+  # # 限制 pods
+  # - type: Pod
+  #   max:
+  #     cpu: "2"
+  #     memory: 1Gi
+  #   min:
+  #     # 与 container 限制保持一致
+  #     cpu: 10m
+  #     memory: 64Mi
   # 限制 containers
   - type: Container
     # 如果容器没有声明自己的 CPU 和 内存请求和限制，将使用默认 CPU 和 内存 请求和限制。
