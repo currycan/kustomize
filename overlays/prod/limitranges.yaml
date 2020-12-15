@@ -11,7 +11,8 @@ spec:
       cpu: "2"
       memory: 1Gi
     min:
-      cpu: 40m
+      # 与 container 限制保持一致
+      cpu: 10m
       memory: 64Mi
   # 限制 containers
   - type: Container
