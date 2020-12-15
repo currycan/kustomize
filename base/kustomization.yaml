@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+# # 可以是url，但必须是文件，不能输目录
+# - https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/examples/wordpress/wordpress/deployment.yaml
+- namespace.yaml
+- limitranges.yaml
+- networkpolicies.yaml
+- resourcequotas.yaml
+
+# - cluster-resources/podsecuritypolicy.yaml
+# - cluster-resources/priorityclasses.yaml
+
+- configmaps/app-demo-1.yaml
+- configmaps/app-demo-2.yaml
+- cronjobs/job-app-demo.yaml
+- deployments/deploy-app-demo.yaml
+- ingresses/app-demo.yaml
+- rbac/app-demo.yaml
+- secrets/app-demo.yaml
+- services/app-demo.yaml
+- statefulsets/sts-app-demo.yaml

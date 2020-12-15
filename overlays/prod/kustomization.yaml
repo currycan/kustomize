@@ -1,0 +1,111 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+- ../../base
+
+# namespace
+namespace: ${PROJECT_NAME}
+
+# 注意：引用变量是$(),不是${}
+vars:
+- name: PROJECT_NAME
+  objref:
+    kind: Namespace
+    name: ${PROJECT_NAME}
+    apiVersion: v1
+  fieldref:
+    fieldpath: metadata.name
+- name: APP_DEMO_NAME
+  objref:
+    kind: Deployment
+    name: ${APP_DEMO_NAME}
+    apiVersion: apps/v1
+  fieldref:
+    fieldpath: metadata.name
+
+# CRD 资源
+# crds:
+# - crds/typeA.yaml
+# - crds/typeB.yaml
+
+# 为所有资源添加标签
+commonLabels:
+  project: ${PROJECT_NAME}
+  owner: alice
+  app: ${APP_DEMO_NAME}
+
+# # 为所有资源添加注释
+# commonAnnotations:
+#   note: generated
+
+# # 新增注解和标签
+# generatorOptions:
+#   disableNameSuffixHash: true
+#   labels:
+#     type: generated
+#   annotations:
+#     note: generated
+
+# 设置镜像
+images:
+- name: ${APP_DEMO_NAME}
+  newName: ${APP_DEMO_IMAGE_NAME}
+  newTag: ${APP_DEMO_IMAGE_TAG}
+
+# 设置configmap
+configMapGenerator:
+- name: example-configmap-1
+  behavior: merge
+  files:
+  - configmaps/application.properties
+- name: example-configmap-2
+  behavior: merge
+  literals:
+  - FOO=Bar
+
+# 设置secret
+secretGenerator:
+- name: example-secret
+  behavior: merge
+  literals:
+  - username=admin
+  - password=secret
+
+# kubectl kustomize build 无法识别该字段, 使用 kustomize build .
+replicas:
+- name: ${APP_DEMO_NAME}
+  count: 1
+
+# # pacth
+# patches:
+# # 直接配置参数,kubectl kustomize build 无法识别该字段,使用 kustomize build .
+# - patch: |-
+#     - op: replace
+#       path: /spec/replicas
+#       value: 1
+#   target:
+#     group: apps
+#     version: v1
+#     kind: Deployment
+#     name: ${APP_DEMO_NAME}
+#     # labelSelector: "app: ${APP_DEMO_NAME}"
+
+patchesStrategicMerge:
+- limitranges.yaml
+- networkpolicies.yaml
+- resourcequotas.yaml
+
+# - cluster-resources/podsecuritypolicy.yaml
+# - cluster-resources/priorityclasses.yaml
+
+- services/service.yaml
+- deployments/env.yaml
+- deployments/healthcheck.yaml
+- deployments/image_pull_secrets.yaml
+- deployments/nodeaffinity.yaml
+- deployments/podaffinity.yaml
+# - deployments/replicas.yaml
+- deployments/resource_limit.yaml
+- deployments/security.yaml
+- deployments/strategy.yaml
