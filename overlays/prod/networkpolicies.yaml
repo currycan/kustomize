@@ -13,8 +13,8 @@ spec:
   - Egress
   # IP 段访问白名单, 入向
   ingress:
-    # 允许所有入向流量
-  # - {}
+  # 允许所有入向流量
+  - {}
   - from:
     # IP 地址段白名单
     - ipBlock:
