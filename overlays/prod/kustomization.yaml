@@ -75,7 +75,7 @@ secretGenerator:
 # kubectl kustomize build 无法识别该字段, 使用 kustomize build .
 replicas:
 - name: docker-2048
-  count: 1
+  count: 3
 
 # # pacth
 # patches:

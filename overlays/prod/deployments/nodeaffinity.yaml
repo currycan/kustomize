@@ -20,7 +20,7 @@ spec:
               - key: 'node-role.kubernetes.io/worker'
                 operator: In
                 values:
-                - 'true'
+                - ''
           preferredDuringSchedulingIgnoredDuringExecution:  # 软策略
           - weight: 1
             preference:
