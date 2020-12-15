@@ -5,26 +5,26 @@ metadata:
   name: ${PROJECT_NAME}
 spec:
   limits:
-  # 限制 pods
-  - type: Pod
-    max:
-      cpu: "2"
-      memory: 1Gi
-    min:
-      cpu: 40m
-      memory: 64Mi
+  # # 限制 pods
+  # - type: Pod
+  #   max:
+  #     cpu: "2"
+  #     memory: 1Gi
+  #   min:
+  #     cpu: 30m
+  #     memory: 128Mi
   # 限制 containers
   - type: Container
     # 如果容器没有声明自己的 CPU 和 内存请求和限制，将使用默认 CPU 和 内存 请求和限制。
     default:
-      cpu: 200m
+      cpu: 300m
       memory: 512Mi
     defaultRequest:
-      cpu: "80m"
-      memory: "256Mi"
+      cpu: "20m"
+      memory: "128Mi"
     max:
       cpu: "1"
       memory: 1.8Gi
     min:
       cpu: 10m
-      memory: 16Mi
+      memory: 64Mi

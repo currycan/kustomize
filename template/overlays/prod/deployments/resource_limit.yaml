@@ -12,5 +12,5 @@ spec:
             memory: 1.5Gi
             cpu: 1
           requests:
-            memory: 128Mi
+            memory: 64Mi
             cpu: 10m
