@@ -14,9 +14,9 @@ spec:
     path: overlays
   destination:
     server: https://kubernetes.default.svc
-    namespace: guestbook
+    namespace: demo-app
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
     kustomize:
-      version: v3.5.4
+      version: v3.8.7
